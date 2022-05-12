@@ -6,13 +6,18 @@
     <button @click="handleClick">click me</button>
     <button @click="age++">plus age</button>
   </div>
+  <br>
+  <br>
   <div>
-    <p>{{ list }}</p>
+    <input type="text" v-model="search">
+    <p>search term - {{ search }}</p>
+    <p v-for="name in matchingNames" :key="name">{{ name }}</p>
   </div>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
+import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'Home',
@@ -29,10 +34,13 @@ export default {
     return { name, age, handleClick}
   },
   setup() {
+    const search = ref("")
+    const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
 
-    let list = ['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach']
-
-    return { list, }
+    const matchingNames = computed(() => {
+      return names.value.filter((name)=> name.includes(search.value))
+    })
+    return { names, search, matchingNames}
   }
 }
 </script>
