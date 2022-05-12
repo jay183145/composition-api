@@ -17,7 +17,7 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
+import { computed, watch, watchEffect } from '@vue/runtime-core'
 
 export default {
   name: 'Home',
@@ -36,6 +36,9 @@ export default {
   setup() {
     const search = ref("")
     const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
+
+    watch(search,() => console.log("Watch change"))
+    watchEffect(()=>(console.log("WatchEffect run", search.value)))
 
     const matchingNames = computed(() => {
       return names.value.filter((name)=> name.includes(search.value))
