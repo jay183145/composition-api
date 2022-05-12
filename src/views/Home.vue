@@ -6,6 +6,9 @@
     <button @click="handleClick">click me</button>
     <button @click="age++">plus age</button>
   </div>
+  <div>
+    <p>{{ list }}</p>
+  </div>
 </template>
 
 <script>
@@ -25,5 +28,11 @@ export default {
 
     return { name, age, handleClick}
   },
+  setup() {
+
+    let list = ['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach']
+
+    return { list, }
+  }
 }
 </script>
